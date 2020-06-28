@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+<body>
+  <div id='app'>
+    
+    <div @click='maopao'>
+      <h1 @click='click'>{{obj.a}}</h1>
+    </div>
+    <h1>{{aaa}}</h1>
+ </div>
+  <script>
+   new Vue({
+    el: "#app",
+    data() {
+      return {
+        obj: {
+          a: 1,
+          b: 2,
+        }
+      }
+    },
+    watch: {
+      'obj.a': function () { },
+      'obj.b': function () { },
+    },
+    methods:{
+      click() {
+        console.log('click')
+        console.log(this._events)
+        console.log(this)
+      },
+      maopao() {
+        console.log("maopao")
+      }
+    },
+    computed: {
+      aaa() {
+        return this.obj.a + this.obj.b
+      },
+    },
+    mounted() {
+      this.$on('click2', () => {
+        console.log('on click')
+      })
+      console.log('this.obj 的值是：', this.obj);
+      this.$emit('click2')
+    }});
+    // {
+    //   tag: 'div',
+    //   props: {
+    //     attrs:{href:'2222'},
+    //     className: 'parent',
+    //   }
+    // }
+   
+  </script>
+</body>
+</html>
